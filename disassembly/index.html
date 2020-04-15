@@ -1,0 +1,870 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+<meta property="og:title" content="Airbreak: Jailbreak your CPAP machine">
+<meta property="og:description" content="Tools to turn your CPAP device into an emergency ventilator">
+<meta property="og:url" content="https://airbreak.dev/">
+<meta property="og:image" content="https://airbreak.dev/images/sprintf.jpg">
+
+    
+      
+        <title>Disassembly - airbreak</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#disassembly" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="airbreak" class="md-header-nav__button md-logo">
+          
+            <img src="../images/logo.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              airbreak
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Disassembly
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/osresearch/airbreak/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="airbreak" class="md-nav__button md-logo">
+      
+        <img src="../images/logo.png" width="48" height="48">
+      
+    </a>
+    airbreak
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/osresearch/airbreak/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
+    
+    <label class="md-nav__link" for="nav-1">
+      Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Airbreak Overview" class="md-nav__link">
+      Airbreak Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Disassembly
+      </label>
+    
+    <a href="./" title="Disassembly" class="md-nav__link md-nav__link--active">
+      Disassembly
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    Tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wiring" class="md-nav__link">
+    Wiring
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firmware/" title="Firmware" class="md-nav__link">
+      Firmware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../evaluation/" title="Evaluation" class="md-nav__link">
+      Evaluation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Information
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Information
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Hardware
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Hardware
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/hardware/" title="Airsense S10 Hardware" class="md-nav__link">
+      Airsense S10 Hardware
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/pinouts/" title="Pinouts" class="md-nav__link">
+      Pinouts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/testpoints/" title="Useful Test Points" class="md-nav__link">
+      Useful Test Points
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Software
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Software
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/tcl/" title="OpenOCD Scripts" class="md-nav__link">
+      OpenOCD Scripts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/windows/" title="Windows Setup Instructions" class="md-nav__link">
+      Windows Setup Instructions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Firmware
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Firmware
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/firmware-docs/" title="Documentation" class="md-nav__link">
+      Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../info/extensions/" title="Development" class="md-nav__link">
+      Development
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    Tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wiring" class="md-nav__link">
+    Wiring
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="disassembly">Disassembly</h1>
+<p><img alt="CPAP running custom firmware" src="../images/airsense-hacked.jpg" /></p>
+<p>In order to dump and replace the device firmware, we need to access the programming port. Unfortunately it is inside the machine so it requires some disassembly to reach.</p>
+<h3 id="tools">Tools</h3>
+<p>You will need the following:</p>
+<ul>
+<li>Torx T15</li>
+<li><a href="https://www.digikey.com/product-detail/en/stmicroelectronics/ST-LINK-V2/497-10484-ND/2214535">ST-Link/V2 STM32 programmer</a> or clone</li>
+<li><a href="https://www.digikey.com/product-detail/en/TC2050-IDC/TC2050-IDC-ND/2605366">TC2050-IDC</a> or <a href="https://www.digikey.com/product-detail/en/tag-connect-llc/TC2050-IDC-NL/TC2050-IDC-NL-ND/2605367">TC2050-ICD-NL</a> programming adapter</li>
+<li>4 male-female 0.1" jumpers</li>
+<li>Computer with <a href="http://openocd.org/">OpenOCD</a> and some Unix familiarity</li>
+<li><code>arm-none-eabi-gcc</code> to compile extensions (not necessary to unlock the device)</li>
+</ul>
+<p>It is difficult but possible to solder directly to the PCB, which relaxes the requirement for the jumpers and programming adapter. For more information on this, see the <a href="../info/testpoints/">list of useful test points</a>.</p>
+<p><img alt="Torx T15 screws" src="../images/airsense-screws.jpg" /></p>
+<p>First you'll need a Torx T15 driver to remove unscrew the three faceplate screws.</p>
+<!-- ![Removing the side cover](images/airsense-sidecover.jpg) -->
+
+<p><img alt="Prying the bottom latches" src="../images/airsense-bottom.jpg" /></p>
+<p>The bottom latches need to be pried open with a flat head or a spudger.</p>
+<p><img alt="Removing the knob" src="../images/airsense-knob.jpg" /></p>
+<p>The knob needs to be pulled firmly straight away from the board to remove it, which will allow
+the gasket to be removed.  Be careful while popping it off the start button on the top of the device.
+It is not necessary to remove the circuit board from the device.</p>
+<h2 id="wiring">Wiring</h2>
+<p><img alt="Attaching the TC-2050 connector" src="../images/airsense-tc2050.jpg" /></p>
+<p><a href="https://www.digikey.com/product-detail/en/TC2050-IDC/TC2050-IDC-ND/2605366">TC2050-IDC</a>
+is useful for development since it has legs
+that attach to the board.  For higher throughput flashing the
+<a href="https://www.digikey.com/product-detail/en/tag-connect-llc/TC2050-IDC-NL/TC2050-IDC-NL-ND/2605367">TC2050-ICD-NL</a>
+is easier to hookup, but requires someone to hold it in place while the
+device is reflashed with custom firmware.  The pinout of this port is not
+the usual 10-pin ARM debug header; it combines the programming pins for
+the STM32 that is the main controller, the auxiliary STM8, and the power watchdog IC.</p>
+<p>Board footprint layout (you don't need this unless you're soldering to
+the board):</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Pin</th>
+<th>Pin</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>STM32_VDD</code></td>
+<td>1 (square)</td>
+<td>2</td>
+<td><code>STM32_NRST</code></td>
+</tr>
+<tr>
+<td><code>STM32_SWDIO</code></td>
+<td>3</td>
+<td>4</td>
+<td><code>STM8_SWIM</code></td>
+</tr>
+<tr>
+<td><code>STM8_VDD</code></td>
+<td>5</td>
+<td>6</td>
+<td><code>PMIC_TDI</code></td>
+</tr>
+<tr>
+<td><code>STM32_SWCLK</code></td>
+<td>7</td>
+<td>8</td>
+<td><code>STM8_TLI</code></td>
+</tr>
+<tr>
+<td><code>GND</code></td>
+<td>9</td>
+<td>10</td>
+<td><code>PMIC_TDO</code></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Connecting the TC-2050 to the STlink2" src="../images/airsense-stlink.jpg" /></p>
+<p>The <a href="https://www.digikey.nl/product-detail/en/stmicroelectronics/ST-LINK-V2/497-10484-ND/2214535">ST-Link/V2 programming
+device</a>
+is used for flashing and debugging the code on the STM32.  It has a
+different pinout from the TC2050 cable, so it is necessary to use some
+male-female 0.1" jumpers to connect the four STM32 programming pins on the
+TC2050 to the STlink.</p>
+<p>TC2050 ribbon cable pinout:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Pin</th>
+<th>Pin</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>STM32_VDD</code></strong></td>
+<td>1 (red)</td>
+<td>3</td>
+<td><strong><code>STM32_SWDIO</code></strong></td>
+</tr>
+<tr>
+<td><code>STM8_VDD</code></td>
+<td>5</td>
+<td>7</td>
+<td><strong><code>STM32_SWCLK</code></strong></td>
+</tr>
+<tr>
+<td><strong><code>GND</code></strong></td>
+<td>9</td>
+<td>10</td>
+<td><code>PMIC_TDO</code></td>
+</tr>
+<tr>
+<td><code>STM8_TLI</code></td>
+<td>8</td>
+<td>6</td>
+<td><code>PMIC_TDI</code></td>
+</tr>
+<tr>
+<td><code>STM8_SWIM</code></td>
+<td>4</td>
+<td>2</td>
+<td><strong><code>STM32_NRST</code></strong></td>
+</tr>
+</tbody>
+</table>
+<p>STlink-V2 pinout:</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Pin</th>
+<th>Pin</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>STM32_VDD</code></strong></td>
+<td>1</td>
+<td>2</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>3</td>
+<td>4</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>5</td>
+<td>6</td>
+<td>NC</td>
+</tr>
+<tr>
+<td><strong><code>STM32_SWDIO</code></strong></td>
+<td>7</td>
+<td>8</td>
+<td>NC</td>
+</tr>
+<tr>
+<td><strong><code>STM32_SWCLK</code></strong></td>
+<td>9</td>
+<td>10</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>11</td>
+<td>12</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>13</td>
+<td>14</td>
+<td>NC</td>
+</tr>
+<tr>
+<td><strong><code>STM32_NRST</code></strong></td>
+<td>15</td>
+<td>16</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>17</td>
+<td>18</td>
+<td>NC</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>19</td>
+<td>20</td>
+<td><strong><code>GND</code></strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A genuine ST-Link programmer uses the STM32_VDD pin to detect the target voltage, not to provide power. Connecting a generic programmer or a Raspberry Pi with this pin configuration will cause the programmer to be back-powered through the AirSense PCB.</p>
+<p><strong>If you are using a SWD programmer other than a genuine ST-Link, do not hook up STM32_VDD to your 3.3V pin or you may risk damaging your board, programmer, or both!</strong></p>
+</div>
+<p>Okay, now you're ready to <a href="../firmware/">flash the firmware!</a></p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        Last update: April 14, 2020
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Airbreak Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Airbreak Overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../firmware/" title="Firmware" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Firmware
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
